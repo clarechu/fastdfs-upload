@@ -24,7 +24,7 @@ public class ImageController {
 
 
     @RequestMapping(value = "fileUpload", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void fileUpload(@RequestParam("file") MultipartFile file) {
+    public StorePath fileUpload(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
                 try {
                     // 获取图片的文件名
@@ -39,7 +39,8 @@ public class ImageController {
                     fis.close();
                     baos.close();
                     byte[] buffer = baos.toByteArray();
-                    StorePath storePath = storageClient.uploadFile(buffer, fileName);
+                    StorePath storePath = storageClient.uploadFile(buffer, "png");
+                    return storePath;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -48,5 +49,6 @@ public class ImageController {
 
             }
         }
+        return null;
     }
 }
