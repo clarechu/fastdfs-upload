@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source video.sh
+source image.sh
 
 export ACT=${1}
 
