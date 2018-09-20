@@ -4,6 +4,7 @@ import com.luhuiguo.fastdfs.domain.StorePath;
 import com.luhuiguo.fastdfs.service.FastFileStorageClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,9 @@ public class ImageController {
 
     @Autowired
     private FastFileStorageClient storageClient;
+
+    @Value("${image.host}")
+    private String host;
 
 
     @RequestMapping(value = "fileUpload", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -52,3 +56,9 @@ public class ImageController {
         return null;
     }
 }
+/*
+
+/var/fdfs/storage0/data/00/00/rBD881tAe8yAStvjAAn3FKEmfJo444.png
+
+*/
+
