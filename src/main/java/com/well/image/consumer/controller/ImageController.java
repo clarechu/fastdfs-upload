@@ -6,9 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
@@ -30,24 +28,24 @@ public class ImageController {
     @RequestMapping(value = "fileUpload", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public StorePath fileUpload(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
-                try {
-                    // 获取图片的文件名
-                    String fileName = file.getOriginalFilename();
-                    InputStream fis = file.getInputStream();
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream(fis.available());
-                    byte[] bytes = new byte[fis.available()];
-                    int temp;
-                    while ((temp = fis.read(bytes)) != -1) {
-                        baos.write(bytes, 0, temp);
-                    }
-                    fis.close();
-                    baos.close();
-                    byte[] buffer = baos.toByteArray();
-                    StorePath storePath = storageClient.uploadFile(buffer, "png");
-                    return storePath;
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                // 获取图片的文件名
+                String fileName = file.getOriginalFilename();
+                InputStream fis = file.getInputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(fis.available());
+                byte[] bytes = new byte[fis.available()];
+                int temp;
+                while ((temp = fis.read(bytes)) != -1) {
+                    baos.write(bytes, 0, temp);
                 }
+                fis.close();
+                baos.close();
+                byte[] buffer = baos.toByteArray();
+                StorePath storePath = storageClient.uploadFile(buffer, "png");
+                return storePath;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (file.getContentType().contains("image")) {
             } else {
 
@@ -55,10 +53,18 @@ public class ImageController {
         }
         return null;
     }
+
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String deleteFile(@RequestBody Image image) {
+        // 图片地址的相对路径
+        storageClient.deleteFile(image.getPath());
+        return "success";
+    }
 }
-/*
 
-/var/fdfs/storage0/data/00/00/rBD881tAe8yAStvjAAn3FKEmfJo444.png
+    /*
 
-*/
+    /var/fdfs/storage0/data/00/00/rBD881tAe8yAStvjAAn3FKEmfJo444.png
+
+    */
 
