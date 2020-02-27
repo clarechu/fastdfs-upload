@@ -57,7 +57,7 @@ public class ImageController {
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String deleteFile(@RequestBody Image image) {
         // 图片地址的相对路径
-        storageClient.deleteFile(image.getPath());
+        storageClient.deleteFile(image.getGroup(), image.getPath());
         return "success";
     }
 }
