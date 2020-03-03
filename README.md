@@ -108,7 +108,7 @@ services:
     ports:
     - 8080:8080
     environment:
-    - fdfs_tracker-list: 10.10.13.50:22122
+    - fdfs_tracker-list=10.10.13.50:22122
 
 
 ```
