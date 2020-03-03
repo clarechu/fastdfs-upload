@@ -26,7 +26,9 @@ public class ImageController {
 
 
     @PostMapping(value = "upload", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public StorePath fileUpload(@RequestParam("file") MultipartFile file) {
+    public BaseResponse fileUpload(@RequestParam("file") MultipartFile file) {
+        StorePath storePath;
+        BaseResponse response = new BaseResponse.Builder<StorePath>().success().builder();
         if (!file.isEmpty()) {
             try {
                 // 获取图片的文件名
@@ -41,8 +43,9 @@ public class ImageController {
                 fis.close();
                 baos.close();
                 byte[] buffer = baos.toByteArray();
-                StorePath storePath = storageClient.uploadFile(buffer, "png");
-                return storePath;
+                storePath = storageClient.uploadFile(buffer, "png");
+                response.setData(storePath);
+                return response;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -51,14 +54,21 @@ public class ImageController {
 
             }*/
         }
-        return null;
+        return response;
     }
 
     @PostMapping(value = "delete")
-    public String deleteFile(@RequestBody Image image) {
+    public BaseResponse deleteFile(@RequestBody Image image) {
         // 图片地址的相对路径
-        storageClient.deleteFile(image.getGroup(), image.getPath());
-        return "success";
+        BaseResponse response = new BaseResponse.Builder<StorePath>().success().builder();
+        try {
+            storageClient.deleteFile(image.getGroup(), image.getPath());
+            return response;
+        } catch (Exception e) {
+            response = new BaseResponse.Builder<StorePath>().fail().builder();
+            response.setMessage(e.getMessage());
+            return response;
+        }
     }
 }
 
