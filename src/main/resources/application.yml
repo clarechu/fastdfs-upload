@@ -11,10 +11,10 @@ fdfs:
   connect-timeout: 2000
   so-timeout: 3000
   tracker-list:
-    - 119.23.38.106:22122
+    - 10.10.13.50:22122
 server:
   port: 8081
 
 
 image:
-  host: http://sp.goodboybighsnsd3e.com/
+  host: xxxxx

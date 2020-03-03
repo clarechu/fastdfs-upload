@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 @RestController
-@RequestMapping(value = "image")
+@RequestMapping(value = "")
 public class ImageController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ImageController {
     private String host;
 
 
-    @RequestMapping(value = "fileUpload", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "upload", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public StorePath fileUpload(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
@@ -46,15 +46,15 @@ public class ImageController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (file.getContentType().contains("image")) {
+/*            if (file.getContentType().contains("image")) {
             } else {
 
-            }
+            }*/
         }
         return null;
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @PostMapping(value = "delete")
     public String deleteFile(@RequestBody Image image) {
         // 图片地址的相对路径
         storageClient.deleteFile(image.getGroup(), image.getPath());
