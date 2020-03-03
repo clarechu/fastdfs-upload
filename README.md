@@ -99,3 +99,16 @@ server {
 
 部署当前服务
 
+```yaml
+version: '3'
+services:
+  image-upload:
+    container_name: image-upload
+    image: harbor.cloud2go.cn/cloudos-dev/image-upload:RC4.24.0
+    ports:
+    - 8080:8080
+    environment:
+    - fdfs_tracker-list: 10.10.13.50:22122
+
+
+```

@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 
-RUN apk add --no-cache curl grep sed unzip bash nodejs nodejs-npm git curl vim wget openssh gradle maven mysql-client
+RUN apk add --no-cache curl grep sed bash git curl vim wget openssh maven
 
 # Set timezone to CST
 ENV TZ=Asia/shanghai
@@ -16,12 +16,6 @@ ENV LANG='zh_CN.UTF-8' LANGUAGE='zh_CN.UTF-8' LC_ALL='zh_CN.UTF-8' \
 
 WORKDIR /home
 
-COPY ./.ssh /root/.ssh
-
-COPY settings.xml /usr/share/java/maven-3/conf/settings.xml
-
-COPY settings.xml /usr/share/maven/conf/settings.xml
-
-COPY *.jar .
+COPY ./target/*.jar .
 
 CMD ["bash", "-c", "java -jar *.jar"]

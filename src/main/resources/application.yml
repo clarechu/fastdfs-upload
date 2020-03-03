@@ -13,7 +13,7 @@ fdfs:
   tracker-list:
     - 10.10.13.50:22122
 server:
-  port: 8081
+  port: 8080
 
 
 image:
