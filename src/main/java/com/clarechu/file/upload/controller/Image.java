@@ -1,4 +1,4 @@
-package com.well.image.consumer.controller;
+package com.clarechu.file.upload.controller;
 
 public class Image {
     private String path;

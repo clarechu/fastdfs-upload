@@ -1,15 +1,13 @@
-package com.well.image.consumer.controller;
+package com.clarechu.file.upload.controller;
 
-import javafx.util.Builder;
-
-public class BaseResponse<T extends Object> {
+public class BaseResponse<T> {
     private int code;
 
     private String message;
 
     private T data;
 
-    public static class Builder<T extends Object> {
+    public static class Builder<T> {
         private int code;
 
         private String message;
@@ -28,8 +26,8 @@ public class BaseResponse<T extends Object> {
             return this;
         }
 
-        public BaseResponse builder() {
-            return new BaseResponse(this.code, this.message, data);
+        public BaseResponse<T> builder() {
+            return new BaseResponse<>(this.code, this.message, data);
         }
     }
 

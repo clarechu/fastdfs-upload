@@ -1,4 +1,4 @@
-package com.well.image.consumer;
+package com.clarechu.file.upload;
 
 import com.luhuiguo.fastdfs.service.FastFileStorageClient;
 import org.junit.Test;

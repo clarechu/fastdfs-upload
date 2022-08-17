@@ -1,4 +1,4 @@
-package com.well.image.consumer;
+package com.clarechu.file.upload;
 
 import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.boot.SpringApplication;
