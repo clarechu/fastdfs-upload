@@ -14,7 +14,7 @@ import java.io.InputStream;
 
 @RestController
 @RequestMapping(value = "")
-public class ImageController {
+public class FileController {
 
     @Autowired
     private FastFileStorageClient storageClient;
@@ -53,11 +53,11 @@ public class ImageController {
     }
 
     @PostMapping(value = "delete")
-    public BaseResponse<?> deleteFile(@RequestBody Image image) {
+    public BaseResponse<?> deleteFile(@RequestBody File file) {
         // 图片地址的相对路径
         BaseResponse<?> response = new BaseResponse.Builder<StorePath>().success().builder();
         try {
-            storageClient.deleteFile(image.getGroup(), image.getPath());
+            storageClient.deleteFile(file.getGroup(), file.getPath());
             return response;
         } catch (Exception e) {
             response = new BaseResponse.Builder<StorePath>().fail().builder();

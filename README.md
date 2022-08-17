@@ -105,8 +105,8 @@ server {
 version: '3'
 services:
   image-upload:
-    container_name: image-upload
-    image: harbor.cloud2go.cn/cloudos-dev/image-upload:RC4.24.0
+    container_name: fastdfs-upload
+    image: clarechu/fastdfs-upload:v0.0.5
     ports:
     - 8080:8080
     environment:

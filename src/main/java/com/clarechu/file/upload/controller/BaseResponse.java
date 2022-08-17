@@ -14,13 +14,13 @@ public class BaseResponse<T> {
 
         private T data;
 
-        public Builder success() {
+        public Builder<T> success() {
             code = 200;
             message = "success";
             return this;
         }
 
-        public Builder fail() {
+        public Builder<T> fail() {
             code = 500;
             message = "fail";
             return this;

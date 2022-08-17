@@ -4,12 +4,10 @@ echo "mvn clean install"
 
 mvn clean install
 
-export HOST=harbor.cloud2go.cn
-export TAG=RC4.24.0
-docker build -t ${HOST}/cloudos-dev/image-upload:${TAG} .
+export HOST=docker.io
+export TAG=v0.0.5
+docker build -t ${HOST}/clarechu/fastdfs-upload:${TAG} .
 
-docker login -p Harbor12345 -u admin ${HOST}
-
-docker push ${HOST}/cloudos-dev/image-upload:${TAG}
+docker push ${HOST}/cloudos-dev/fastdfs-upload:${TAG}
 
 rm -rf target/

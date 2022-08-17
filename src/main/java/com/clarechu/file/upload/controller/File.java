@@ -1,6 +1,6 @@
 package com.clarechu.file.upload.controller;
 
-public class Image {
+public class File {
     private String path;
 
     private String group;
